@@ -37,18 +37,22 @@
             margin-bottom: 28px;
             background: radial-gradient(circle at top left, rgba(214, 111, 80, 0.18), transparent 55%);
         }
-        .logos-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 8px;
-        }
         .logos-block {
             margin-top: 32px;
             padding-top: 18px;
             border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .logos-bar {
+            background-color: #E0E0E0; /* palette light gray strip */
+            border-radius: 12px;
+            padding: 10px 18px;
+        }
+        .logos-row {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
         .logos-title {
             font-size: 12px;
@@ -58,13 +62,14 @@
             text-align: center;
         }
         .logo-badge {
-            background-color: #ffffff;
-            padding: 8px 18px;
-            border-radius: 999px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex: 0 1 auto;
         }
         .logo-badge img {
             display: block;
@@ -172,11 +177,13 @@
                 width: 100%;
             }
             .logos-row {
+                flex-wrap: wrap;
                 justify-content: center;
-                gap: 10px;
+                gap: 12px;
             }
             .logo-badge {
-                padding: 6px 14px;
+                flex: 0 0 48%;
+                justify-content: center;
             }
             .logo-badge img {
                 max-height: 34px;
@@ -237,21 +244,6 @@
                     <a href="https://centredelama.com/so/61PnXApeO/c?w=bCkCKTbr0MEt6D7IN9M6JTEerqHvAwxp8VGyYpZmBhE.eyJ1IjoiaHR0cHM6Ly82NGJkYzgwNC1iMGNkLTQ1MGMtYWNlMy05YzlhOWVmNTA4OTQudXNyZmlsZXMuY29tL3VnZC82NGJkYzhfNmY1ODg1YmE2YzFhNGYyMGJjZjYyZTgyOThlNmMwOWYucGRmIiwiciI6IiIsIm0iOiJtYWlsIiwiYyI6ImE5OGE1M2FjLWQxMWMtNDhlMS1iYjNhLWNiZTg2MTE4YWIyNyJ9" class="button">
                         Visualizar el programa
                     </a>
-                </div>
-
-                <div class="logos-block">
-                    <div class="logos-title">Entidades participantes</div>
-                    <div class="logos-row">
-                        <div class="logo-badge">
-                            <img src="cid:neoma_udg_logo" alt="Neoma · Universitat de Girona" class="logo-wide" />
-                        </div>
-                        <div class="logo-badge">
-                            <img src="cid:centre_logo" alt="Centre de la Mà de Barcelona" />
-                        </div>
-                        <div class="logo-badge">
-                            <img src="cid:medpeek_logo" alt="Medpeek" />
-                        </div>
-                    </div>
                 </div>
 
                 <div class="footer">

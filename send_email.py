@@ -19,6 +19,11 @@ BATCH_PAUSE_SECONDS = 30  # seconds
 PROGRAM_FILENAME = (
     "PROGRAMA: I Curso de Neuropatías por Atrapamiento de la extremidad superior.pdf"
 )
+LOGO_FILES = [
+    ("neoma_udg_logo", os.path.join("logos", "Neoma i Udg Normatiu.png")),
+    ("centre_logo", os.path.join("logos", "centre logo.png")),
+    ("medpeek_logo", os.path.join("logos", "medpeek_logo.png")),
+]
 DEFAULT_TEMPLATE_PATH = os.path.join(
     os.path.dirname(__file__), "email_template.html"
 )
@@ -76,6 +81,39 @@ def attach_program_pdf(msg: EmailMessage) -> None:
     )
 
 
+def attach_logos(msg: EmailMessage) -> None:
+    """
+    Attach partner logos as inline images so they can be referenced
+    from the HTML body via cid: identifiers.
+    """
+    base_dir = os.path.dirname(__file__)
+
+    for cid, relative_path in LOGO_FILES:
+        logo_path = os.path.join(base_dir, relative_path)
+        if not os.path.exists(logo_path):
+            continue
+
+        # Infer MIME subtype from file extension
+        lower = logo_path.lower()
+        if lower.endswith(".png"):
+            subtype = "png"
+        elif lower.endswith(".jpg") or lower.endswith(".jpeg"):
+            subtype = "jpeg"
+        else:
+            continue
+
+        with open(logo_path, "rb") as f:
+            data = f.read()
+
+        msg.add_attachment(
+            data,
+            maintype="image",
+            subtype=subtype,
+            filename=os.path.basename(logo_path),
+            cid=f"<{cid}>",
+        )
+
+
 def load_recipients_from_csv(csv_path: str) -> List[str]:
     """
     Load recipient email addresses from a CSV file.
@@ -124,6 +162,7 @@ def send_email(recipient: str, subject: str, html_body: str) -> None:
     user, password = load_credentials()
     msg = build_message(subject=subject, sender=user, recipient=recipient, html_body=html_body)
     attach_program_pdf(msg)
+    attach_logos(msg)
 
     context = ssl.create_default_context()
 
